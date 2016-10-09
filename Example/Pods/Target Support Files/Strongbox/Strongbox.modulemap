@@ -1,0 +1,6 @@
+framework module Strongbox {
+  umbrella header "Strongbox-umbrella.h"
+
+  export *
+  module * { export * }
+}

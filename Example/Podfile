@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Strongbox_Example' do
+  pod 'Strongbox', :path => '../'
+
+  target 'Strongbox_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

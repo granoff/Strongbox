@@ -1,0 +1,16 @@
+PODS:
+  - Strongbox (0.1.0)
+
+DEPENDENCIES:
+  - Strongbox (from `../`)
+
+EXTERNAL SOURCES:
+  Strongbox:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Strongbox: a929ee27d994e21bea7b03e1070dc33e3e563aa9
+
+PODFILE CHECKSUM: 54c6f85fc83c94b56646a88b014ad55795d6e8a3
+
+COCOAPODS: 1.0.1
