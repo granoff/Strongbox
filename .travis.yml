@@ -13,5 +13,5 @@ before_install:
 - gem install cocoapods --version 1.1.0.rc.2 --no-document
 - rvm get head
 script:
-- set -o pipefail && xcodebuild test -workspace Example/Strongbox.xcworkspace -scheme Strongbox-Example -sdk iphonesimulator10.0 ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/Strongbox.xcworkspace -scheme Strongbox-Example -sdk iphonesimulator10.0 ONLY_ACTIVE_ARCH=NO -destination "platform=iOS Simulator,name=iPhone 7,OS=10.0"
 - pod lib lint
