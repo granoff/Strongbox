@@ -12,5 +12,5 @@ before_install:
 - gem uninstall --all --executables cocoapods
 - gem install cocoapods --version 1.1.0.rc.2 --no-document
 script:
-- set -o pipefail && xcodebuild test -workspace Example/Strongbox.xcworkspace -scheme Strongbox-Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/Strongbox.xcworkspace -scheme Strongbox-Example -sdk iphonesimulator10.0 ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
