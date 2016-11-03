@@ -80,7 +80,7 @@ class Tests: XCTestCase {
         let key = "TestSetKey"
         let testSet = NSSet(array: testArray)
         XCTAssertTrue(subject.archive(testSet, key: key), "Should be able to store a set")
-        let object:Any = subject.unarchive(objectForKey: key)
+        let object:Any? = subject.unarchive(objectForKey: key)
         guard let set=object as? Set<String> else {
             XCTFail("Failed to retrieve Set<String> object")
             return
@@ -92,7 +92,7 @@ class Tests: XCTestCase {
         let subject = Strongbox(keyPrefix: "StrongBoxTests")
         let key = "TestDictionaryKey"
         XCTAssertTrue(subject.archive(testDictionary, key: key), "Should be able to store a dictionary")
-        let object:Any = subject.unarchive(objectForKey: key)
+        let object:Any? = subject.unarchive(objectForKey: key)
         guard let dict=object as? Dictionary<String,String> else {
             XCTFail("Failed to retrieve Dictionary<String,String> object")
             return
@@ -117,7 +117,7 @@ class Tests: XCTestCase {
         let subject = Strongbox(keyPrefix: "StrongBoxTests")
         let key = "TestDateKey"
         XCTAssertTrue(subject.archive(testDate, key: key), "Should be able to store a date")
-        let object:Any = subject.unarchive(objectForKey: key)
+        let object:Any? = subject.unarchive(objectForKey: key)
         guard let date=object as? NSDate else {
             XCTFail("Failed to retrieve NSDate object")
             return
