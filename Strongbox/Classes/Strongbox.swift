@@ -14,7 +14,7 @@ public class Strongbox {
     let keyPrefix: String
     public var lastStatus = errSecSuccess
     
-    init() {
+    public init() {
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             self.keyPrefix = bundleIdentifier
         } else {
@@ -22,7 +22,7 @@ public class Strongbox {
         }
     }
     
-    init(keyPrefix: String) {
+    public init(keyPrefix: String) {
         self.keyPrefix = keyPrefix
     }
     
