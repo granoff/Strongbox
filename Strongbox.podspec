@@ -29,6 +29,7 @@ s.summary          = 'Strongbox is a Swift utility class for storing data secure
   s.social_media_url = 'https://twitter.com/granoff'
 
   s.ios.deployment_target = '10.0'
+  s.watchos.deployment_target = '3.0'
 
   s.source_files = 'Strongbox/Classes/**/*'
   
