@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Strongbox'
-  s.version          = '0.3.0'
+  s.version          = '0.3.1'
 s.summary          = 'Strongbox is a Swift utility class for storing data securely in the keychain. Use it to store small, sensitive bits of data securely.'
 
 # This description is used to generate tags and improve search results.
