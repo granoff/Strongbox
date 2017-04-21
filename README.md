@@ -38,7 +38,7 @@ Strongbox includes the following methods:
 + `archive(_ object: Any?, key: String, accessibility: CFString) -> Bool`
 + `unarchive(objectForKey: String) -> Any?`
 
-These methods use an `NSKeyedArchiver` and `NSKeyedUnarchiver`, respectively, to encode and decode your objects. Your objects must conform toe `NSSecureCoding`.
+These methods use an `NSKeyedArchiver` and `NSKeyedUnarchiver`, respectively, to encode and decode your objects. Your objects must conform to `NSSecureCoding`.
 
 The `archive` methods return `Bool` indicating if the keychain operation succeeded or failed. The `unarchive` method returns an optional which may be unwrapped if the operation succeeded. The returned value is of type `Any?` and you are expected to unwrap it and cast it appropriately to whatever type you know it should be. For example:
 
