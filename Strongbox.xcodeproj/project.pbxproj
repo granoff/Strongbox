@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1E3AD20A1F2007B10034FBDE /* Strongbox.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E3AD2081F2007B10034FBDE /* Strongbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1E3AD2111F2007C40034FBDE /* Strongbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3AD2101F2007C40034FBDE /* Strongbox.swift */; };
+		1E3AD2131F2009A70034FBDE /* Strongbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3AD2121F2009A70034FBDE /* Strongbox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E3AD2051F2007B10034FBDE /* Strongbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Strongbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E3AD2081F2007B10034FBDE /* Strongbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Strongbox.h; sourceTree = "<group>"; };
 		1E3AD2091F2007B10034FBDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1E3AD2101F2007C40034FBDE /* Strongbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strongbox.swift; path = ../../Classes/Strongbox.swift; sourceTree = "<group>"; };
+		1E3AD2121F2009A70034FBDE /* Strongbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strongbox.swift; path = Classes/Strongbox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 		1E3AD2071F2007B10034FBDE /* Strongbox */ = {
 			isa = PBXGroup;
 			children = (
-				1E3AD2101F2007C40034FBDE /* Strongbox.swift */,
+				1E3AD2121F2009A70034FBDE /* Strongbox.swift */,
 				1E3AD2081F2007B10034FBDE /* Strongbox.h */,
 				1E3AD2091F2007B10034FBDE /* Info.plist */,
 			);
@@ -135,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E3AD2111F2007C40034FBDE /* Strongbox.swift in Sources */,
+				1E3AD2131F2009A70034FBDE /* Strongbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +301,7 @@
 				1E3AD20F1F2007B10034FBDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
