@@ -1,6 +1,7 @@
 # Strongbox
 
 [![CI Status](http://img.shields.io/travis/granoff/Strongbox.svg?style=flat)](https://travis-ci.org/granoff/Strongbox)
+[![Coverage Status](https://coveralls.io/repos/github/granoff/Strongbox/badge.svg?branch=master)](https://coveralls.io/github/granoff/Strongbox?branch=master)
 [![Version](https://img.shields.io/cocoapods/v/Strongbox.svg?style=flat)](http://cocoapods.org/pods/Strongbox)
 [![License](https://img.shields.io/cocoapods/l/Strongbox.svg?style=flat)](http://cocoapods.org/pods/Strongbox)
 [![Platform](https://img.shields.io/cocoapods/p/Strongbox.svg?style=flat)](http://cocoapods.org/pods/Strongbox)
