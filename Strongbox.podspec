@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Strongbox'
-  s.version          = '0.4.1'
+  s.version          = '0.5.0'
 s.summary          = 'Strongbox is a Swift utility class for storing data securely in the keychain. Use it to store small, sensitive bits of data securely.'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ s.summary          = 'Strongbox is a Swift utility class for storing data secure
   s.source           = { :git => 'https://github.com/granoff/Strongbox.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/granoff'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '9.0'
   s.watchos.deployment_target = '3.0'
 
   s.source_files = 'Strongbox/Classes/**/*'

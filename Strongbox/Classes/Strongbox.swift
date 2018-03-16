@@ -11,39 +11,15 @@ import Security
 
 public class Strongbox {
     
-    let keyPrefix: String
+    let keyPrefix: String?
     public var lastStatus = errSecSuccess
     
     public init() {
-        if let bundleIdentifier = Bundle.main.bundleIdentifier {
-            self.keyPrefix = bundleIdentifier
-        } else {
-            self.keyPrefix = ""
-        }
+        self.keyPrefix = Bundle.main.bundleIdentifier
     }
     
     public init(keyPrefix: String) {
         self.keyPrefix = keyPrefix
-    }
-    
-    /**
-     Insert an object into the keychain. Pass `nil` for object to remove it from the keychain.
-     
-     **Note:** This is a convenience method that calls `archive(_:key:accessibility)` passing
-     `kSecAttrAccessibleWhenUnlocked` for the last argument. If you require different keychain
-     accessibility, call the other method directly passing the accessibility leve you require.
-
-     - returns:
-        Boolean indicating success or failure
-     
-     - parameters:
-        - object: data to store. Pass `nil` to remove previous value for key
-        - key: key with which to associated stored value, or key to remove if `object` is nil
-     
-     */
-    public func archive(_ object: Any?, key: String) -> Bool
-    {
-        return self.archive(object, key: key, accessibility: kSecAttrAccessibleWhenUnlocked)
     }
     
     /**
@@ -58,16 +34,11 @@ public class Strongbox {
         - accessibility: keychain accessibility of item once stored
      
      */
-    public func archive(_ object: Any?, key: String, accessibility: CFString) -> Bool
+    public func archive(_ object: Any?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool
     {
         guard let _=object as? NSSecureCoding else {
             // The optional is empty, so remove the key
-            
-            let query = self.query()
-            query[kSecAttrService] = hierarchicalKey(key)
-            lastStatus = SecItemDelete(query)
-            
-            return lastStatus == errSecSuccess || lastStatus == errSecItemNotFound
+            return remove(key: key, accessibility: accessibility)
         }
         
         let data = NSMutableData()
@@ -76,6 +47,26 @@ public class Strongbox {
         archiver.finishEncoding()
         
         return self.set(data, key: key, accessibility: accessibility)
+    }
+
+    /**
+     Convenience method for removing a previously stored key.
+     
+     - returns:
+        Boolean indicating success or failure
+     
+     - parameters:
+        - key: key for which to remove the stored value
+        - accessibility: keychain accessibility of item
+
+     */
+    @discardableResult
+    public func remove(key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
+        let query = self.query()
+        query[kSecAttrService] = hierarchicalKey(key)
+        lastStatus = SecItemDelete(query)
+        
+        return lastStatus == errSecSuccess || lastStatus == errSecItemNotFound
     }
     
     /**
@@ -94,14 +85,12 @@ public class Strongbox {
         }
 
         let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data)
-        if let object = unarchiver.decodeObject(forKey: key) { return object }
-        
-        return nil
+        return unarchiver.decodeObject(forKey: key)
     }
 
     // MARK: Private functions to do all the work
     
-    func set(_ data: NSMutableData?, key: String, accessibility: CFString) -> Bool {
+    func set(_ data: NSMutableData?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
         let hierKey = hierarchicalKey(key)
 
         let dict = service()
@@ -124,6 +113,7 @@ public class Strongbox {
     }
     
     func hierarchicalKey(_ key: String) -> String {
+        guard let keyPrefix = keyPrefix else { return "." + key }
         return keyPrefix + "." + key
     }
     

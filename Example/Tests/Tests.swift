@@ -28,7 +28,14 @@ class Tests: XCTestCase {
         
         let storedValue = sb.unarchive(objectForKey: "TestKey") as! String
         XCTAssertTrue(valueToStore == storedValue, "stored value (\(storedValue)) does not equal value stored (\(valueToStore))")
-        
+    }
+    
+    func testRemove() {
+        let sb = Strongbox()
+        let valueToStore = "Foobar"
+        XCTAssertTrue(sb.archive(valueToStore, key:"TestKey"))
+        XCTAssertTrue(sb.remove(key: "TestKey"), "Could not remove TestKey")
+        XCTAssertTrue(sb.remove(key: "TestKey"), "Unexpectedly removed key that should not exist")
     }
 
     func testHierarchicalKeyNoPrefix() {

@@ -1,6 +1,6 @@
 {
   "name": "Strongbox",
-  "version": "0.1.0",
+  "version": "0.4.1",
   "summary": "Strongbox is a Swift utility class for storing data securely in the keychain. Use it to store small, sensitive bits of data securely.",
   "homepage": "https://github.com/granoff/Strongbox",
   "license": {
@@ -12,11 +12,12 @@
   },
   "source": {
     "git": "https://github.com/granoff/Strongbox.git",
-    "tag": "0.1.0"
+    "tag": "0.4.1"
   },
   "social_media_url": "https://twitter.com/granoff",
   "platforms": {
-    "ios": "10.0"
+    "ios": "9.0",
+    "watchos": "3.0"
   },
   "source_files": "Strongbox/Classes/**/*",
   "frameworks": "Security"
