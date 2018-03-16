@@ -37,7 +37,7 @@ Strongbox includes the following methods:
 + `archive(_ object: Any?, key: String) -> Bool`
 + `archive(_ object: Any?, key: String, accessibility: CFString) -> Bool`
 + `unarchive(objectForKey: String) -> Any?`
-+`remove(key: String) -> Bool`
++ `remove(key: String) -> Bool`
 
 These methods use an `NSKeyedArchiver` and `NSKeyedUnarchiver`, respectively, to encode and decode your objects. Your objects must conform to `NSSecureCoding`.
 
