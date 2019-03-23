@@ -43,7 +43,7 @@ public class Strongbox {
         
         let data = NSMutableData()
         let archiver: NSKeyedArchiver
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, watchOS 4.0, tvOS 11.0, *) {
             archiver = NSKeyedArchiver(requiringSecureCoding: true)
         } else {
             archiver = NSKeyedArchiver(forWritingWith: data)
@@ -52,7 +52,7 @@ public class Strongbox {
         archiver.finishEncoding()
         
         var result = false
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
             result = self.set(archiver.encodedData as NSData, key: key, accessibility: accessibility)
         } else {
             result = self.set(data, key: key, accessibility: accessibility)
