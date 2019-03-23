@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Mark H. Granoff' => 'mark@granoff.net' }
   s.source           = { :git => 'https://github.com/granoff/Strongbox.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/granoff'
+  s.swift_version    = '4.2'
 
   s.ios.deployment_target = '9.0'
   s.watchos.deployment_target = '3.0'
