@@ -42,11 +42,23 @@ public class Strongbox {
         }
         
         let data = NSMutableData()
-        let archiver = NSKeyedArchiver(forWritingWith: data)
+        let archiver: NSKeyedArchiver
+        if #available(iOS 11.0, *) {
+            archiver = NSKeyedArchiver(requiringSecureCoding: true)
+        } else {
+            archiver = NSKeyedArchiver(forWritingWith: data)
+        }
         archiver.encode(object, forKey: key)
         archiver.finishEncoding()
         
-        return self.set(data, key: key, accessibility: accessibility)
+        var result = false
+        if #available(iOS 10.0, *) {
+            result = self.set(archiver.encodedData as NSData, key: key, accessibility: accessibility)
+        } else {
+            result = self.set(data, key: key, accessibility: accessibility)
+        }
+        
+        return result
     }
 
     /**
@@ -90,7 +102,7 @@ public class Strongbox {
 
     // MARK: Private functions to do all the work
     
-    func set(_ data: NSMutableData?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
+    private func set(_ data: NSData?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
         let hierKey = hierarchicalKey(key)
 
         let dict = service()
@@ -112,12 +124,12 @@ public class Strongbox {
         return lastStatus == errSecSuccess
     }
     
-    func hierarchicalKey(_ key: String) -> String {
+    internal func hierarchicalKey(_ key: String) -> String {
         guard let keyPrefix = keyPrefix else { return "." + key }
         return keyPrefix + "." + key
     }
     
-    func query() -> NSMutableDictionary {
+    private func query() -> NSMutableDictionary {
         let query = NSMutableDictionary()
         query[kSecClass] = kSecClassGenericPassword
         query[kSecReturnData] = kCFBooleanTrue
@@ -125,13 +137,13 @@ public class Strongbox {
         return query
     }
     
-    func service() -> NSMutableDictionary {
+    private func service() -> NSMutableDictionary {
         let dict = NSMutableDictionary()
         dict.setObject(kSecClassGenericPassword, forKey: kSecClass as! NSCopying)
         return dict
     }
     
-    func data(forKey key:String) -> Data? {
+    private func data(forKey key:String) -> Data? {
         let hierKey = hierarchicalKey(key)
         let query = self.query()
         query.setObject(hierKey, forKey: kSecAttrService as! NSCopying)
