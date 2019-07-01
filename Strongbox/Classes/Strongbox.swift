@@ -36,7 +36,7 @@ public class Strongbox {
   
     @discardableResult
     public func archive(_ object: Any?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
-        guard let _= object as? NSSecureCoding else {
+        guard let _ = object as? NSSecureCoding else {
             // The optional is empty, so remove the key
             return remove(key: key, accessibility: accessibility)
         }
