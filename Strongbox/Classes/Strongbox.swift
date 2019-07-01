@@ -23,6 +23,40 @@ public class Strongbox {
     }
     
     /**
+     Insert an object into the keychain. Pass `nil` for object to remove it from the keychain.
+     - returns:
+     Boolean indicating success or failure
+     
+     - parameters:
+     - object: data to store. Pass `nil` to remove previous value for key
+     - key: key with which to associate the stored value, or key to remove if `object` is nil
+     - accessibility: keychain accessibility of item once stored
+     
+     */
+    
+    @discardableResult
+    public static func archive(_ object: Any?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
+        let sb = Strongbox()
+        return sb.archive(object, key: key, accessibility: accessibility)
+    }
+    
+    /**
+     Retrieve an object from the keychain.
+     
+     - returns:
+     Re-constituted object from keychain, or nil if the key was not found. Since the method returns `Any?` it is
+     the caller's responsibility to cast the result to the type expected.
+     
+     - parameters:
+     - key: the key to use to locate the stored value
+     */
+    
+    public static func unarchive(objectForKey key: String) -> Any? {
+        let sb = Strongbox()
+        return sb.unarchive(objectForKey: key)
+    }
+    
+    /**
      Insert an object into the keychain. Pass `nil` for object to remove it from the keychain.     
      - returns:
         Boolean indicating success or failure
@@ -153,12 +187,24 @@ public class Strongbox {
         
         return data as? Data
     }
-
 }
 
 // Codable
 
 extension Strongbox {
+    
+    /**
+     Insert a codable object into the keychain. Pass `nil` for object to remove it from the keychain.
+     - returns:
+     Boolean indicating success or failure
+     
+     - parameters:
+     - encodable: encodable data to store. Pass `nil` to remove previous value for key
+     - key: key with which to associate the stored value, or key to remove if `object` is nil
+     - accessibility: keychain accessibility of item once stored
+     
+     */
+    
     public func encode<T: Encodable>(_ encodable: T?, key: String, encoder: JSONEncoder = .init(), accessibility: CFString = kSecAttrAccessibleWhenUnlocked) throws {
         let sb = Strongbox()
         guard
@@ -168,38 +214,52 @@ extension Strongbox {
         sb.archive(data, key: key, accessibility: accessibility)
     }
     
-    public func decode<T: Decodable>(forKey key: String, decoder: JSONDecoder = .init()) throws -> T? {
+    /**
+     Retrieve an decodable object from the keychain.
+     
+     - returns:
+     Re-constituted object from keychain, or nil if the key was not found. Method can throw an error if an issue is found
+     
+     - parameters:
+     - key: the key to use to locate the stored value
+     */
+    
+    public func decode<T: Decodable>(type: T.Type = T.self, forKey key: String, decoder: JSONDecoder = .init()) throws -> T? {
         let sb = Strongbox()
         guard
             let data = sb.unarchive(objectForKey: key) as? Data
             else { return nil }
         return try decoder.decode(T.self, from: data)
     }
-}
-
-// Convenience 
-
-extension Strongbox {
     
-    @discardableResult
-    public static func archive(_ object: Any?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
-        let sb = Strongbox()
-        return sb.archive(object, key: key, accessibility: accessibility)
-    }
+    /**
+     Insert a codable object into the keychain. Pass `nil` for object to remove it from the keychain.
+     - returns:
+     Boolean indicating success or failure
+     
+     - parameters:
+     - encodable: encodable data to store. Pass `nil` to remove previous value for key
+     - key: key with which to associate the stored value, or key to remove if `object` is nil
+     - accessibility: keychain accessibility of item once stored
+     
+     */
     
-    public static func unarchive(objectForKey key: String) -> Any? {
-        let sb = Strongbox()
-        return sb.unarchive(objectForKey: key)
-    }
-}
-
-extension Strongbox {
     public static func encode<T: Encodable>(_ encodable: T?, key: String, encoder: JSONEncoder = .init(), accessibility: CFString = kSecAttrAccessibleWhenUnlocked) throws {
         let sb = Strongbox()
         try sb.encode(encodable, key: key, encoder: encoder, accessibility: accessibility)
     }
     
-    public static func decode<T: Decodable>(forKey key: String, decoder: JSONDecoder = .init()) throws -> T? {
+    /**
+     Retrieve an decodable object from the keychain.
+     
+     - returns:
+     Re-constituted object from keychain, or nil if the key was not found. Method can throw an error if an issue is found
+     
+     - parameters:
+     - key: the key to use to locate the stored value
+     */
+    
+    public static func decode<T: Decodable>(type: T.Type = T.self, forKey key: String, decoder: JSONDecoder = .init()) throws -> T? {
         let sb = Strongbox()
         return try sb.decode(forKey: key, decoder: decoder)
     }
