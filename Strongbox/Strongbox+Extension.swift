@@ -11,24 +11,24 @@ import Foundation
 // Convenience methods
 
 extension Strongbox {
-    static func archive(_ object: Any?, key: String, accessibility: CFString) -> Bool {
+    public static func archive(_ object: Any?, key: String, accessibility: CFString) -> Bool {
         let sb = Strongbox()
         return sb.archive(object, key: key, accessibility: accessibility)
     }
     
-    static func unarchive(objectForKey key: String) -> Any? {
+    public static func unarchive(objectForKey key: String) -> Any? {
         let sb = Strongbox()
         return sb.unarchive(objectForKey: key)
     }
 }
 
 extension Strongbox {
-    static func encode<T: Encodable>(_ encodable: T?, key: String, accessibility: CFString) throws {
+    public static func encode<T: Encodable>(_ encodable: T?, key: String, accessibility: CFString) throws {
         let sb = Strongbox()
         try sb.encode(encodable, key: key, accessibility: accessibility)
     }
     
-    static func decode<T: Decodable>(objectForKey key: String) throws -> T? {
+    public static func decode<T: Decodable>(objectForKey key: String) throws -> T? {
         let sb = Strongbox()
         return try sb.decode(forKey: key)
     }
