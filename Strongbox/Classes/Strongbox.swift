@@ -41,8 +41,7 @@ public class Strongbox {
         - key: key with which to associated stored value, or key to remove if `object` is nil
      
      */
-    public func archive(_ object: Any?, key: String) -> Bool
-    {
+    public func archive(_ object: Any?, key: String) -> Bool {
         return self.archive(object, key: key, accessibility: kSecAttrAccessibleWhenUnlocked)
     }
     
@@ -58,9 +57,12 @@ public class Strongbox {
         - accessibility: keychain accessibility of item once stored
      
      */
-    public func archive(_ object: Any?, key: String, accessibility: CFString) -> Bool
-    {
-        guard let _=object as? NSSecureCoding else {
+    
+    @discardableResult
+    public func archive(_ object: Any?, key: String, accessibility: CFString) -> Bool {
+        guard
+            let _=object as? NSSecureCoding
+            else {
             // The optional is empty, so remove the key
             
             let query = self.query()
@@ -88,10 +90,10 @@ public class Strongbox {
      - parameters:
         - key: the key to use to locate the stored value
     */
-    public func unarchive(objectForKey key:String) -> Any? {
-        guard let data = self.data(forKey: key) else {
-            return nil
-        }
+    public func unarchive(objectForKey key: String) -> Any? {
+        guard
+            let data = self.data(forKey: key)
+            else { return nil }
 
         let unarchiver = NSKeyedUnarchiver(forReadingWith: data as Data)
         if let object = unarchiver.decodeObject(forKey: key) { return object }
@@ -105,7 +107,7 @@ public class Strongbox {
         let hierKey = hierarchicalKey(key)
 
         let dict = service()
-        let entries: [AnyHashable:Any] = [kSecAttrService as AnyHashable: hierKey,
+        let entries: [AnyHashable: Any] = [kSecAttrService as AnyHashable: hierKey,
                                           kSecAttrAccessible as AnyHashable: accessibility,
                                           kSecValueData as AnyHashable: data!]
         dict.addEntries(from: entries)
@@ -141,7 +143,7 @@ public class Strongbox {
         return dict
     }
     
-    func data(forKey key:String) -> Data? {
+    func data(forKey key: String) -> Data? {
         let hierKey = hierarchicalKey(key)
         let query = self.query()
         query.setObject(hierKey, forKey: kSecAttrService as! NSCopying)

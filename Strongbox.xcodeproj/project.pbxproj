@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1E3AD20A1F2007B10034FBDE /* Strongbox.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E3AD2081F2007B10034FBDE /* Strongbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E3AD2131F2009A70034FBDE /* Strongbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3AD2121F2009A70034FBDE /* Strongbox.swift */; };
+		1E88E6B922CA801D006BFEAA /* Strongbox+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E88E6B822CA801D006BFEAA /* Strongbox+Codable.swift */; };
+		1E88E6BB22CA8057006BFEAA /* Strongbox+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E88E6BA22CA8057006BFEAA /* Strongbox+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +18,8 @@
 		1E3AD2081F2007B10034FBDE /* Strongbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Strongbox.h; sourceTree = "<group>"; };
 		1E3AD2091F2007B10034FBDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E3AD2121F2009A70034FBDE /* Strongbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strongbox.swift; path = Classes/Strongbox.swift; sourceTree = "<group>"; };
+		1E88E6B822CA801D006BFEAA /* Strongbox+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strongbox+Codable.swift"; sourceTree = "<group>"; };
+		1E88E6BA22CA8057006BFEAA /* Strongbox+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strongbox+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,8 @@
 			isa = PBXGroup;
 			children = (
 				1E3AD2121F2009A70034FBDE /* Strongbox.swift */,
+				1E88E6B822CA801D006BFEAA /* Strongbox+Codable.swift */,
+				1E88E6BA22CA8057006BFEAA /* Strongbox+Extension.swift */,
 				1E3AD2081F2007B10034FBDE /* Strongbox.h */,
 				1E3AD2091F2007B10034FBDE /* Info.plist */,
 			);
@@ -108,6 +114,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 1E3AD1FB1F2007B10034FBDE;
@@ -136,6 +143,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E3AD2131F2009A70034FBDE /* Strongbox.swift in Sources */,
+				1E88E6BB22CA8057006BFEAA /* Strongbox+Extension.swift in Sources */,
+				1E88E6B922CA801D006BFEAA /* Strongbox+Codable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +268,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -278,7 +287,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hawkimedia.Strongbox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
