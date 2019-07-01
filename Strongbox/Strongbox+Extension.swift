@@ -11,7 +11,9 @@ import Foundation
 // Convenience methods
 
 extension Strongbox {
-    public static func archive(_ object: Any?, key: String, accessibility: CFString) -> Bool {
+    
+    @discardableResult
+    public static func archive(_ object: Any?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
         let sb = Strongbox()
         return sb.archive(object, key: key, accessibility: accessibility)
     }
@@ -23,13 +25,13 @@ extension Strongbox {
 }
 
 extension Strongbox {
-    public static func encode<T: Encodable>(_ encodable: T?, key: String, accessibility: CFString) throws {
+    public static func encode<T: Encodable>(_ encodable: T?, key: String, encoder: JSONEncoder = .init(), accessibility: CFString = kSecAttrAccessibleWhenUnlocked) throws {
         let sb = Strongbox()
-        try sb.encode(encodable, key: key, accessibility: accessibility)
+        try sb.encode(encodable, key: key, encoder: encoder, accessibility: accessibility)
     }
     
-    public static func decode<T: Decodable>(objectForKey key: String) throws -> T? {
+    public static func decode<T: Decodable>(objectForKey key: String, decoder: JSONDecoder = .init()) throws -> T? {
         let sb = Strongbox()
-        return try sb.decode(forKey: key)
+        return try sb.decode(forKey: key, decoder: decoder)
     }
 }
