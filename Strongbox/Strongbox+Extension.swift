@@ -30,7 +30,7 @@ extension Strongbox {
         try sb.encode(encodable, key: key, encoder: encoder, accessibility: accessibility)
     }
     
-    public static func decode<T: Decodable>(objectForKey key: String, decoder: JSONDecoder = .init()) throws -> T? {
+    public static func decode<T: Decodable>(forKey key: String, decoder: JSONDecoder = .init()) throws -> T? {
         let sb = Strongbox()
         return try sb.decode(forKey: key, decoder: decoder)
     }
