@@ -37,6 +37,7 @@ Strongbox includes the following methods:
 + `archive(_ object: Any?, key: String) -> Bool`
 + `archive(_ object: Any?, key: String, accessibility: CFString) -> Bool`
 + `unarchive(objectForKey: String) -> Any?`
++ `remove(key: String) -> Bool`
 
 These methods use an `NSKeyedArchiver` and `NSKeyedUnarchiver`, respectively, to encode and decode your objects. Your objects must conform to `NSSecureCoding`.
 
@@ -47,6 +48,8 @@ let sb = Strongbox()
 sb.archive("String", key: "MyKey") // true
 let myString = sb.unarchive(objectForKey: "MyKey") as! String
 ```
+
+The `remove` method is a convenient and more intuitive mechanism for removing previously stored values.
 
 Slightly less contrived:
 
@@ -88,12 +91,25 @@ Add Run Script phase to your unit tests target Build Phases with:
 
 ## Installation
 
-Strongbox is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+Strongbox is available through [CocoaPods](http://cocoapods.org) or [Carthage](https://github.com/Carthage/Carthage).
+
+### CocoaPods
+To install, simply add the following line to your Podfile:
 
 ```ruby
 pod "Strongbox"
 ```
+
+Then, run `pod install` from Terminal.
+
+### Carthage
+To install, simply add the following line to your Cartfile:
+
+```ruby
+github "granoff/Strongbox"
+```
+
+Then, run `carthage update` to build the framework, and follow Carthage's [instructions](https://github.com/Carthage/Carthage#getting-started) for adding to your project.
 
 ## Author
 

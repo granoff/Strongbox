@@ -2,17 +2,19 @@
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
 
-osx_image: xcode8.2
-language: objective-c
+osx_image: xcode10.1
+language: swift
 # cache: cocoapods
 # podfile: Example/Podfile
+
+
 before_install:
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
-- gem uninstall --all --executables cocoapods
-- gem install cocoapods --version 1.1.0.rc.2 --no-document
-- gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-- rvm get head
+##- gem uninstall --all --executables cocoapods
+##- gem install cocoapods --version 1.6.1 --no-document
+##- gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+##- rvm get head
 script:
-- set -o pipefail && xcodebuild test -workspace Example/Strongbox.xcworkspace -scheme Strongbox-Example -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6,OS=10.0" | xcpretty -c --test --color
+- set -o pipefail && xcodebuild test -workspace Example/Strongbox.xcworkspace -scheme Strongbox-Example -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone XR,OS=12.1" | xcpretty -c --test --color
 - pod lib lint
