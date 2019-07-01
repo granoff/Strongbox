@@ -8,7 +8,7 @@
 import Foundation
 
 extension Strongbox {
-    func encode<T: Encodable>(_ encodable: T?, key: String, encoder: JSONEncoder = .init(), accessibility: CFString) throws {
+    func encode<T: Encodable>(_ encodable: T?, key: String, encoder: JSONEncoder = .init(), accessibility: CFString = kSecAttrAccessibleWhenUnlocked) throws {
         let sb = Strongbox()
         guard
             let encodable = encodable
