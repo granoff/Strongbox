@@ -11,6 +11,9 @@
 		1E3AD2131F2009A70034FBDE /* Strongbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E3AD2121F2009A70034FBDE /* Strongbox.swift */; };
 		1E88E6B922CA801D006BFEAA /* Strongbox+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E88E6B822CA801D006BFEAA /* Strongbox+Codable.swift */; };
 		1E88E6BB22CA8057006BFEAA /* Strongbox+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E88E6BA22CA8057006BFEAA /* Strongbox+Extension.swift */; };
+		1E88E6BC22CA91A6006BFEAA /* Strongbox.swift in Headers */ = {isa = PBXBuildFile; fileRef = 1E3AD2121F2009A70034FBDE /* Strongbox.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E88E6BD22CA91A6006BFEAA /* Strongbox+Codable.swift in Headers */ = {isa = PBXBuildFile; fileRef = 1E88E6B822CA801D006BFEAA /* Strongbox+Codable.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E88E6BE22CA91A6006BFEAA /* Strongbox+Extension.swift in Headers */ = {isa = PBXBuildFile; fileRef = 1E88E6BA22CA8057006BFEAA /* Strongbox+Extension.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E3AD20A1F2007B10034FBDE /* Strongbox.h in Headers */,
+				1E88E6BC22CA91A6006BFEAA /* Strongbox.swift in Headers */,
+				1E88E6BD22CA91A6006BFEAA /* Strongbox+Codable.swift in Headers */,
+				1E88E6BE22CA91A6006BFEAA /* Strongbox+Extension.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
