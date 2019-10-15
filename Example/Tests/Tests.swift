@@ -163,4 +163,31 @@ class Tests: XCTestCase {
         XCTAssertTrue(testDictionary == dict, "Retrieved embedded dictionary should equal original embedded dictionary")
         
     }
+
+    func testMissingKey() {
+        let subject = Strongbox(keyPrefix: "StrongBoxTests")
+        let key = "MissingKey"
+        XCTAssertNil(subject.unarchive(objectForKey: key))
+    }
+
+    func testChangedStruct() {
+        struct Version1 {
+            let s: String
+        }
+        struct Version2 {
+            let s: String
+            let t: Int
+        }
+
+        let subject = Strongbox(keyPrefix: "StrongBoxTests")
+        let key = "StructVersion"
+        let s1 = Version1(s: "version1")
+
+        XCTAssertTrue(subject.archive(s1, key: key))
+        _ = subject.unarchive(objectForKey: key) as? Version1
+        if let _ = subject.unarchive(objectForKey: key) as? Version2 {
+            XCTFail("Should not be able to unarchive Version1 as Version2")
+        }
+        XCTAssertNil(subject.unarchive(objectForKey: key) as? Version2)
+    }
 }
