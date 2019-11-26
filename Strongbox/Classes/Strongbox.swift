@@ -12,6 +12,9 @@ import Security
 public class Strongbox {
     
     let keyPrefix: String?
+    
+    private let lock = NSLock()
+    
     public var lastStatus = errSecSuccess
     
     public init() {
@@ -74,6 +77,12 @@ public class Strongbox {
      */
     @discardableResult
     public func remove(key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
+        
+         // The lock prevents the code to be run simultaneously
+         // from multiple threads which may result in crashing
+        lock.lock()
+        defer { lock.unlock() }
+        
         let query = self.query()
         query[kSecAttrService] = hierarchicalKey(key)
         lastStatus = SecItemDelete(query)
@@ -103,6 +112,12 @@ public class Strongbox {
     // MARK: Private functions to do all the work
     
     private func set(_ data: NSData?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
+        
+         // The lock prevents the code to be run simultaneously
+         // from multiple threads which may result in crashing
+        lock.lock()
+        defer { lock.unlock() }
+        
         let hierKey = hierarchicalKey(key)
 
         let dict = service()
@@ -144,6 +159,12 @@ public class Strongbox {
     }
     
     private func data(forKey key:String) -> Data? {
+        
+        // The lock prevents the code to be run simultaneously
+        // from multiple threads which may result in crashing
+        lock.lock()
+        defer { lock.unlock() }
+        
         let hierKey = hierarchicalKey(key)
         let query = self.query()
         query.setObject(hierKey, forKey: kSecAttrService as! NSCopying)
