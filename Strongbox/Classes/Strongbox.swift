@@ -12,6 +12,9 @@ import Security
 public class Strongbox {
     
     let keyPrefix: String?
+    
+    private let lock = NSLock()
+    
     public var lastStatus = errSecSuccess
     
     public init() {
@@ -40,6 +43,11 @@ public class Strongbox {
             // The optional is empty, so remove the key
             return remove(key: key, accessibility: accessibility)
         }
+
+        // The lock prevents the code to be run simultaneously
+        // from multiple threads which may result in crashing
+        lock.lock()
+        defer { lock.unlock() }
         
         let data = NSMutableData()
         let archiver: NSKeyedArchiver
@@ -74,6 +82,12 @@ public class Strongbox {
      */
     @discardableResult
     public func remove(key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
+        
+         // The lock prevents the code to be run simultaneously
+         // from multiple threads which may result in crashing
+        lock.lock()
+        defer { lock.unlock() }
+        
         let query = self.query()
         query[kSecAttrService] = hierarchicalKey(key)
         lastStatus = SecItemDelete(query)
@@ -92,6 +106,12 @@ public class Strongbox {
         - key: the key to use to locate the stored value
     */
     public func unarchive(objectForKey key:String) -> Any? {
+        
+         // The lock prevents the code to be run simultaneously
+         // from multiple threads which may result in crashing
+        lock.lock()
+        defer { lock.unlock() }
+        
         guard let data = self.data(forKey: key) else {
             return nil
         }
@@ -103,6 +123,7 @@ public class Strongbox {
     // MARK: Private functions to do all the work
     
     private func set(_ data: NSData?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
+                
         let hierKey = hierarchicalKey(key)
 
         let dict = service()
@@ -144,6 +165,7 @@ public class Strongbox {
     }
     
     private func data(forKey key:String) -> Data? {
+
         let hierKey = hierarchicalKey(key)
         let query = self.query()
         query.setObject(hierKey, forKey: kSecAttrService as! NSCopying)
