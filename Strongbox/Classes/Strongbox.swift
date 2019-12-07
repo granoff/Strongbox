@@ -39,15 +39,15 @@ public class Strongbox {
      */
     public func archive(_ object: Any?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool
     {
-        // The lock prevents the code to be run simultaneously
-        // from multiple threads which may result in crashing
-        lock.lock()
-        defer { lock.unlock() }
-        
         guard let _=object as? NSSecureCoding else {
             // The optional is empty, so remove the key
             return remove(key: key, accessibility: accessibility)
         }
+
+        // The lock prevents the code to be run simultaneously
+        // from multiple threads which may result in crashing
+        lock.lock()
+        defer { lock.unlock() }
         
         let data = NSMutableData()
         let archiver: NSKeyedArchiver
