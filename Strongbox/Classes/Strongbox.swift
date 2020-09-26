@@ -9,20 +9,18 @@
 import Foundation
 import Security
 
-public class Strongbox {
+public final class Strongbox {
     
-    let keyPrefix: String?
-    
+    let keyPrefix: String
     private let lock = NSLock()
+    private(set) public var lastStatus = errSecSuccess
     
-    public var lastStatus = errSecSuccess
-    
-    public init() {
-        self.keyPrefix = Bundle.main.bundleIdentifier
+    public init(keyPrefix: String?) {
+        self.keyPrefix = keyPrefix ?? Bundle.main.bundleIdentifier ?? ""
     }
-    
-    public init(keyPrefix: String) {
-        self.keyPrefix = keyPrefix
+
+    public convenience init() {
+        self.init(keyPrefix: nil)
     }
     
     /**
@@ -37,6 +35,7 @@ public class Strongbox {
         - accessibility: keychain accessibility of item once stored
      
      */
+    @discardableResult
     public func archive(_ object: Any?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool
     {
         guard let _=object as? NSSecureCoding else {
@@ -67,6 +66,13 @@ public class Strongbox {
         }
         
         return result
+    }
+
+    @discardableResult
+    public func archive<T: Encodable>(object: T?, key: String, encoder: JSONEncoder = .init(), accessibility: CFString = kSecAttrAccessibleWhenUnlocked) throws -> Bool {
+        guard let object = object else { return archive(nil, key: key, accessibility: accessibility) }
+        let data = try encoder.encode(object)
+        return archive(data, key: key, accessibility: accessibility)
     }
 
     /**
@@ -120,6 +126,13 @@ public class Strongbox {
         return unarchiver.decodeObject(forKey: key)
     }
 
+    public func unarchive<T: Decodable>(_ type: T.Type = T.self, for key: String, decoder: JSONDecoder = .init()) throws -> T? {
+        guard let data = unarchive(objectForKey: key) as? Data else { return nil }
+        return try decoder.decode(T.self, from: data)
+    }
+}
+
+internal extension Strongbox {
     // MARK: Private functions to do all the work
     
     private func set(_ data: NSData?, key: String, accessibility: CFString = kSecAttrAccessibleWhenUnlocked) -> Bool {
@@ -145,8 +158,7 @@ public class Strongbox {
         return lastStatus == errSecSuccess
     }
     
-    internal func hierarchicalKey(_ key: String) -> String {
-        guard let keyPrefix = keyPrefix else { return "." + key }
+    func hierarchicalKey(_ key: String) -> String {
         return keyPrefix + "." + key
     }
     
@@ -165,7 +177,6 @@ public class Strongbox {
     }
     
     private func data(forKey key:String) -> Data? {
-
         let hierKey = hierarchicalKey(key)
         let query = self.query()
         query.setObject(hierKey, forKey: kSecAttrService as! NSCopying)
@@ -175,5 +186,4 @@ public class Strongbox {
         
         return data as? Data
     }
-
 }

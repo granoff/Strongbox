@@ -16,6 +16,8 @@
 		1E3AD2081F2007B10034FBDE /* Strongbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Strongbox.h; sourceTree = "<group>"; };
 		1E3AD2091F2007B10034FBDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E3AD2121F2009A70034FBDE /* Strongbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strongbox.swift; path = Classes/Strongbox.swift; sourceTree = "<group>"; };
+		4D691258251D452B00A8AE76 /* StrongboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrongboxTests.swift; sourceTree = "<group>"; };
+		4D69125A251D452B00A8AE76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 			isa = PBXGroup;
 			children = (
 				1E3AD2071F2007B10034FBDE /* Strongbox */,
+				4D691257251D452B00A8AE76 /* StrongboxTests */,
 				1E3AD2061F2007B10034FBDE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +56,15 @@
 				1E3AD2091F2007B10034FBDE /* Info.plist */,
 			);
 			path = Strongbox;
+			sourceTree = "<group>";
+		};
+		4D691257251D452B00A8AE76 /* StrongboxTests */ = {
+			isa = PBXGroup;
+			children = (
+				4D691258251D452B00A8AE76 /* StrongboxTests.swift */,
+				4D69125A251D452B00A8AE76 /* Info.plist */,
+			);
+			path = StrongboxTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,6 +105,7 @@
 		1E3AD1FC1F2007B10034FBDE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1170;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Carthage;
 				TargetAttributes = {
@@ -108,6 +121,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 1E3AD1FB1F2007B10034FBDE;
