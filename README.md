@@ -93,7 +93,7 @@ Add Run Script phase to your unit tests target Build Phases with:
 
 ## Installation
 
-Strongbox is available through [CocoaPods](http://cocoapods.org) or [Carthage](https://github.com/Carthage/Carthage).
+Strongbox is available through [CocoaPods](http://cocoapods.org), [Carthage](https://github.com/Carthage/Carthage), and Swift Package Manager.
 
 ### CocoaPods
 To install, simply add the following line to your Podfile:
@@ -112,6 +112,10 @@ github "granoff/Strongbox"
 ```
 
 Then, run `carthage update` to build the framework, and follow Carthage's [instructions](https://github.com/Carthage/Carthage#getting-started) for adding to your project.
+
+### Swift Package Manager
+
+`git@github.com:granoff/Strongbox`
 
 ## Author
 
